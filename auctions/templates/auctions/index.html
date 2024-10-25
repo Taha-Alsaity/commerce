@@ -18,7 +18,7 @@
     <form action="{% url 'watchlist' id=list.id %}" method="POST">
       {% csrf_token %}
       <input type="hidden" name="list" value="{{list.id}}">
-    <div class="card"  >
+    <div style="margin: 20px;" class="card"  >
         <img src="{{list.imageurl}}" alt="Item" style="width:220px; margin-bottom: 5px; text-align: center;">
         <div class="container">
           <h6 style="width: 200px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">

@@ -57,13 +57,13 @@
       
 </nav>
 {% if user.is_authenticated %}
-<nav style="display: flex; flex-direction: row; width: 100%; justify-content: space-around;">
+<nav style="display: flex; flex-wrap: wrap; flex-directio: row; width: fit-content; justify-content: space-around;">
   <form action="{% url 'bid' id=wlist.id %}" method="POST">
     {% csrf_token %}
     <input type="hidden" name="hidden" value="{{wlist.id}}">
 <nav style="display: flex; flex-direction: column;">
-<input style="width: 400px; height: 50px; margin: 10px;" type="number" name="bid" min="0" placeholder="Bid here..."  step="0.01">
-          <input type="submit" value="Bid" style="margin-left: 10px; width: 400px;" >
+<input style="max-width: fit-content; height: 50px; margin: 10px;" type="number" name="bid" min="0" placeholder="Bid here..."  step="0.01">
+          <input type="submit" value="Bid" style="margin-left: 10px; width: 250px;" >
 </nav>
 </form>
 
@@ -71,8 +71,8 @@
   {% csrf_token %}
   <input type="hidden" name="hidden2" value="{{wlist.id}}">
 <nav style="display: flex; flex-direction: column;">
-<input style="width: 700px; height: 50px; margin: 10px;" type="text" name="comment"  placeholder="Comment here..."  >
-        <input type="submit" value="Add" style="margin-left: 10px; width: 700px;" >
+<input style="width: fit-content; height: 50px; margin: 10px;" type="text" name="comment"  placeholder="Comment here..."  >
+        <input type="submit" value="Add" style="margin-left: 10px; width: 250px" >
 </nav>
 </form></nav>
 <h2 style="color: rgb(33, 114, 98); margin-top: 50px;padding-bottom: 10px; width: 100%; text-align: center; border-bottom: 2px solid rgb(161, 159, 159);">Comments</h2>
