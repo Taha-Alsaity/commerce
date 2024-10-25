@@ -27,7 +27,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
-
+CSRF_TRUSTED_ORIGINS = [
+    'https://commerce101.up.railway.app/',  # Add your production URL
+]
 # Application definition
 
 INSTALLED_APPS = [
