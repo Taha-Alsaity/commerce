@@ -19,6 +19,7 @@
     <button type="button" class="btn-close" data-bs-dismiss="alert" style="background: none; border: none; font: 1.5em sans-serif;" aria-label="Close">×</button>
   </div>
   {% endfor %}
+  {% if request.user.username != "" %}
   {% if isit is not True %}
   <form action="{% url 'addwl' id=wlist.id %}" style="display: flex; justify-content: right;" method="POST">
     {% csrf_token %}
@@ -35,6 +36,8 @@
     <input type="submit" value="Remove from watchlist" style=" margin-right: 60px; width: 220px; background-color: rgb(196, 58, 58);" >
 
   </form>
+  {% endif %}
+  {% else %}
   {% endif %}
 <nav class="all" >
 
