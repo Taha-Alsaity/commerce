@@ -1,0 +1,36 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Active Listings</h2>
+    
+    <form style="width: 140px; display: flex; margin: 5px; "  action="{% url 'category' %}" method="POST">
+      {% csrf_token %}
+  <select id="country" name="category" style="width: 130px;">
+      {% for cate in Categories %}
+      <option value="{{cate.Category_name}}">{{cate.Category_name}}</option>
+      {% endfor %}
+     
+     
+    </select> <input type="submit" value="Search"></form> 
+ 
+<nav class="all">
+    {% for list in Clist %}
+    <form action="{% url 'watchlist' id=list.id %}" method="POST">
+      {% csrf_token %}
+      <input type="hidden" name="list" value="{{list.id}}">
+    <div class="card"  >
+        <img src="{{list.imageurl}}" alt="Item" style="width:220px; margin-bottom: 5px; text-align: center;">
+        <div class="container">
+          <h6 style="width: 200px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">
+            <b>{{ list.title }}</b>
+          </h6>
+          <p style="width: 200px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">
+            {{list.description}}</p>
+          <h1>${{list.price}}</h1> 
+          <p>{{list.date}}</p>
+          <p>{{list.owner}}</p>
+          <input type="submit" value="More">
+        </div>
+      </div></form>
+    {% endfor %}</nav>
+{% endblock %}

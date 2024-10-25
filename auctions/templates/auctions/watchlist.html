@@ -1,0 +1,81 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+{% if user.username == wlist.owner.username %}
+<form action="{% url 'end' id=wlist.id %}" style="" method="POST">
+  {% csrf_token %}
+
+
+  <input type="submit" value="End bidding" style="margin-right: 60px; width: 220px; " >
+
+</form>
+{% else %}
+{% endif %}
+
+  {% for message in messages %}
+  <div class="alert alert-warning alert-dismissible fade show" style="display: flex; justify-content: space-between; align-items: center; font-size: 1.3em;" role="alert">
+    <p>{{message}}</p>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" style="background: none; border: none; font: 1.5em sans-serif;" aria-label="Close">×</button>
+  </div>
+  {% endfor %}
+  {% if isit is not True %}
+  <form action="{% url 'addwl' id=wlist.id %}" style="display: flex; justify-content: right;" method="POST">
+    {% csrf_token %}
+
+
+    <input type="submit" value="Add to Watchlist" style="margin-right: 60px; width: 220px; " >
+
+  </form>
+  {% else %}
+  <form action="{% url 'removewl' id=wlist.id %}" style="display: flex; justify-content: right;" method="POST">
+    {% csrf_token %}
+
+
+    <input type="submit" value="Remove from watchlist" style=" margin-right: 60px; width: 220px; background-color: rgb(196, 58, 58);" >
+
+  </form>
+  {% endif %}
+<nav class="all" >
+
+    
+        <img src="{{wlist.imageurl}}" alt="Avatar" style="width:260px; margin-bottom: 5px; text-align: center;">
+        <div class="container">
+          
+            <h6 style="padding: 5px;"><b>Category: {{wlist.category}}</b> </h6>
+          <h4><b>{{wlist.title}}</b> </h4> 
+          <p>{{wlist.description}}</p>
+          <h1>${{wlist.price}}</h1> 
+          <p>{{wlist.date}}</p>
+          <p>{{wlist.owner}}</p>
+          
+          
+        </div>
+      
+</nav>
+{% if user.is_authenticated %}
+<nav style="display: flex; flex-direction: row; width: 100%; justify-content: space-around;">
+  <form action="{% url 'bid' id=wlist.id %}" method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="hidden" value="{{wlist.id}}">
+<nav style="display: flex; flex-direction: column;">
+<input style="width: 400px; height: 50px; margin: 10px;" type="number" name="bid" min="0" placeholder="Bid here..."  step="0.01">
+          <input type="submit" value="Bid" style="margin-left: 10px; width: 400px;" >
+</nav>
+</form>
+
+<form action="{% url 'comment' id=wlist.id %}" method="POST">
+  {% csrf_token %}
+  <input type="hidden" name="hidden2" value="{{wlist.id}}">
+<nav style="display: flex; flex-direction: column;">
+<input style="width: 700px; height: 50px; margin: 10px;" type="text" name="comment"  placeholder="Comment here..."  >
+        <input type="submit" value="Add" style="margin-left: 10px; width: 700px;" >
+</nav>
+</form></nav>
+<h2 style="color: rgb(33, 114, 98); margin-top: 50px;padding-bottom: 10px; width: 100%; text-align: center; border-bottom: 2px solid rgb(161, 159, 159);">Comments</h2>
+{% for commentt in allcomments %}
+<p><b>{{commentt.Writer.username}} : </b>{{commentt.comment}}</p>
+{% endfor %}
+{% else %}
+{% endif %}
+{% endblock %}
