@@ -159,7 +159,7 @@ def category(request):
 def Creating(request):
     if request.method == 'GET':
         Categories = Category.objects.all()
-        return render(request,'auctions/Create.html',{
+        return render(request,'auctions/create.html',{
             'Categories': Categories,
            
         })
